@@ -1,0 +1,9 @@
+<ul class="nav nav-pills">
+    <li class="nav-item px-2">
+        <a href="{% url 'user_list' %}" class="btn btn-outline-dark {% if user_list %}active{% endif %}"
+            aria-current="page">Users</a>
+    </li>
+    <li class="nav-item px-2">
+        <a href="{% url 'group_list' %}" class="btn btn-outline-dark {% if group_list %}active{% endif %}">Groups</a>
+    </li>
+</ul>

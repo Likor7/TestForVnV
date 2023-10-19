@@ -1,0 +1,21 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<div class="d-flex justify-content-end ">
+    <a class="btn btn-outline-secondary m-3" href="{% url 'user_create' %}">Add User</a>
+</div>
+
+<div class="scrollable-container">
+    {% for user in users %}
+    <div class="row border-bottom py-2">
+        <div class="col-1 d-flex justify-content-evenly">{{ user.id }}</div>
+        <div class="col-3 d-flex justify-content-evenly">{{ user.username }}</div>
+        <div class="col-2 d-flex justify-content-evenly">{{ user.date_joined }}</div>
+        <div class="col-3 d-flex justify-content-evenly">{{ user.groups.first.name }}</div>
+        <div class="col-3 d-flex justify-content-end ">
+            <a class="btn btn-sm btn-outline-info mx-3" href="{% url 'user_edit' user.pk %}">Edit</a>
+            <a class="btn btn-sm btn-outline-danger mx-3" href="{% url 'user_delete' user.pk %}">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

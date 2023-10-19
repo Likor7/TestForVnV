@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-end ">
+    <a class="btn btn-outline-secondary m-3" href="{% url 'group_create' %}">Add Group</a>
+</div>
+
+<div class="scrollable-container">
+    {% for group in groups %}
+    <div class="row border-bottom py-2">
+        <div class="col-1 d-flex justify-content-evenly">{{ group.id }}</div>
+        <div class="col-4 d-flex justify-content-evenly">{{ group.name }}</div>
+        <div class="col-4 d-flex justify-content-evenly">{{ group.description }}</div>
+        <div class="col-3 d-flex justify-content-end">
+            <a class="btn btn-sm btn-outline-info mx-3" href="{% url 'group_edit' group.pk %}">Edit</a>
+            <a class="btn btn-sm btn-outline-danger mx-3" href="{% url 'group_delete' group.pk %}">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

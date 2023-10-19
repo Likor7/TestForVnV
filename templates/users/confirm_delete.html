@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    Підтвердження видалення
+                </div>
+                <div class="card-body">
+                    {% if object.username %}
+                    <p>Ви впевнені, що хочете видалити користувача <strong>{{ object.username }}</strong>?</p>
+                    {% else %}
+                    <p>Ви впевнені, що хочете видалити групу <strong>{{ object.name }}</strong>?</p>
+                    {% endif %}
+                    <p>Ця дія незворотньо видалить усю інформацію, пов'язану з цим об'єктом.</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Видалити</button>
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-secondary">Відмінити</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
