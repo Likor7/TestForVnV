@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
@@ -24,6 +24,14 @@ class UserCreateView(CreateView):
     form_class = UserForm
     template_name = "users/user_form.html"
     success_url = reverse_lazy("user_list")
+
+    def dispatch(self, request, *args, **kwargs):
+        if not ExtendedGroup.objects.exists():
+            messages.error(
+                self.request, "Не можна cтворити користувача, якщо нема групи."
+            )
+            return redirect("group_create")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

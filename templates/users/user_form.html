@@ -15,11 +15,24 @@
             <label class="form-label" for="{{ form.group.id_for_label }}">Group</label>
             <select class="form-select" id="{{ form.group.id_for_label }}" name="{{ form.group.name }}">
                 {% for value, text in form.group.field.choices %}
-                <option value="{{ value }}" {% if user_obj|stringformat:"s" == text %} selected {% endif %}>{{ text }}</option>
+                <option value="{{ value }}" {% if user_obj|stringformat:"s" == text %} selected {% endif %}>{{ text }}
+                </option>
                 {% endfor %}
             </select>
-
         </div>
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable fade show d-flex justify-content-between">
+            <ul class="mb-0">
+                {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li><strong>{{ field }}:</strong> {{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
         <button type="submit" class="btn btn-success">{% if user %}Save Changes{% else %}Add
             User{%endif%}</button>
     </form>

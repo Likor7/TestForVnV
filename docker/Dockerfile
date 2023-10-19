@@ -2,7 +2,7 @@
 FROM python:3.10
 
 # set working directory
-WORKDIR /
+WORKDIR /app
 
 # Set environment varibles
 # Keeps Python from generating .pyc files in the container
@@ -22,3 +22,5 @@ RUN pip install -r requirements.txt
 
 # Copy project
 COPY . .
+
+RUN chmod +x /app/wait-for-it.sh
